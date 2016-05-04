@@ -26,13 +26,13 @@ class Validate
 
         // Whitelisted?
         if(isset($lists['whitelist'])) {
-            if(in_array($email, $lists['whitelist']))
+            if(in_array($email, $lists['whitelist']) || in_array($split[1], $lists['whitelist']))
                 return true;
         }
 
         // Blacklisted?
         if(isset($lists['blacklist'])) {
-            if(in_array($email, $lists['blacklist']))
+            if(in_array($email, $lists['blacklist']) || in_array($split[1], $lists['blacklist']))
                 return false;
         }
 
