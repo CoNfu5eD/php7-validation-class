@@ -58,4 +58,34 @@ class Validate
 
         return $results;
     }
+
+    /**
+     * Static function for validating a IP Address.
+     * @param string $address IP address
+     * @return bool is the IP Address valid?
+     */
+    static function ip(string $address) : bool
+    {
+        return false !== filter_var($address, FILTER_VALIDATE_IP);
+    }
+
+    /**
+     * Static function for validating a IPv4 Address.
+     * @param string $address IPv4 address
+     * @return bool is the IPv4 Address valid?
+     */
+    static function ipv4 (string $address) : bool
+    {
+        return false !== filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+    }
+
+    /**
+     * Static function for validating a IPv6 Address.
+     * @param string $address IPv6 address
+     * @return bool is the IPv6 Address valid?
+     */
+    static function ipv6 (string $address) : bool
+    {
+        return false !== filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+    }
 }
