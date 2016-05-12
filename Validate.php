@@ -88,4 +88,17 @@ class Validate
     {
         return false !== filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
     }
+
+    /**
+     * Static function for validating a number range.
+     * @param float $value number to validate
+     * @param float $min min value
+     * @param float $max max value
+     * @return bool is the value between min and max?
+     */
+    static function range(float $value, float $min, float $max) : bool
+    {
+        return ($value >= $min && $value <= $max);
+    }
+
 }
