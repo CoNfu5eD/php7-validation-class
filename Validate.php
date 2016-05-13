@@ -147,4 +147,15 @@ class Validate
         return true;
     }
 
+    /**
+     * A static method to validate SWIFT/BIC codes.
+     * @param string $swift swift/bic code
+     * @return bool swift/bic valid?
+     */
+    static function swift(string $swift) : bool
+    {
+        $swift = trim($swift); // sanitize swift/bic
+        return mb_ereg_match("^([a-zA-Z]){4}([a-zA-Z]){2}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$", $swift);
+    }
+
 }
