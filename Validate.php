@@ -12,10 +12,10 @@
 class Validate
 {
     /**
-     * Static function for validating email addresses with multiple secure levels and blacklist.
+     * Static function for validating email addresses with multiple secure levels and black- and whitelist.
      * @param string $email email address
      * @param int $level secure level
-     * @param array $lists filter lists like whitelist, blacklist, dnsbl,..
+     * @param array $lists filter lists like whitelist, blacklist,..
      * @return bool is the email address valid?
      */
     static function email (string $email, int $level=1, array $lists=[]) : bool
@@ -49,11 +49,6 @@ class Validate
         // check for dns MX entry
         if($results && $level >= 2) {
             $results = checkdnsrr($split[1], "MX");
-        }
-
-        // DNS Blacklist (domains)
-        if($results && isset($lists['dnsbl']) && $level >= 3) {
-            // TODO: check if domain is registered in dnsbl of list.
         }
 
         return $results;
