@@ -131,7 +131,7 @@ class Validate
 
             // The IBAN matches in length and basic structure?
             $matches = null;
-            if(mb_ereg_match('/^([A-Za-z]{2})(\d{2})([A-Za-z0-9]{' . $country_length[$country] . '})$/', $iban, $matches)) {
+            if(mb_ereg_match('/^([A-Za-z]{2})(\d{2})([A-Za-z0-9]{' . ($country_length[$country]-4) . '})$/', $iban, $matches)) {
                 $checkNum = $matches[1];
                 $bban = strtoupper($matches[2]);
 
