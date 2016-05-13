@@ -116,9 +116,10 @@ class Validate
      * Static method for validating a IBAN (International Bank Account Number).
      * @link https://www.swift.com/sites/default/files/resources/swift_standards_ibanregistry.pdf IBAN Standards (Swift)
      * @param string $iban International Bank Account Number
+     * @param bool $swiftapi use the swift.com api for validation?
      * @return bool is the IBAN valid?
      */
-    static function iban(string $iban) : bool
+    static function iban(string $iban, bool $swiftapi=false) : bool
     {
         $country_length = [
             "AL" => 28, "AD" => 24, "AT" => 20, "AZ" => 28, "BH" => 22, "BE" => 16, "BA" => 20, "BR" => 29, "BG" => 22, "CR" => 21,
@@ -155,6 +156,14 @@ class Validate
 
                 // Invalid if check number is not the same as the calculated one.
                 if ($calc_checkNum !== $checkNum) return false;
+
+                // check swift.com API
+                if($swiftapi) {
+                    $api_result = file_get_contents("https://api.swiftrefdata.com/v1/ibans/$country$checkNum$bban/validity.xml");
+                    $api_result_array = json_decode(json_encode((array) simplexml_load_string($api_result)),1);
+                    if($api_result_array['validity'] !== "IVAL") return false;
+                }
+
             }
             else
                 return false;
@@ -165,13 +174,27 @@ class Validate
     }
 
     /**
-     * Static method to validate SWIFT/BIC codes.
+     * Static method to validate SWIFT/BIC codes if iban is set validation will use swift.com API to check BIC is correct for iban.
      * @param string $swift swift/bic code
+     * @param string $iban International Bank Account Number
      * @return bool swift/bic valid?
      */
-    static function swift(string $swift) : bool
+    static function swift(string $swift, string $iban=null) : bool
     {
         $swift = trim($swift); // sanitize swift/bic
+
+        if($iban !== null) {
+            $iban = mb_ereg_replace("/(\s|\-)/", "", $iban); // sanitize iban
+
+            $api_result = file_get_contents("https://api.swiftrefdata.com/v1/ibans/$iban/bic.xml");
+            $api_result_array = json_decode(json_encode((array) simplexml_load_string($api_result)),1);
+            if($api_result_array['bic'] === $swift)
+                return true;
+            else
+                return false;
+
+        }
+
         return mb_ereg_match("^([a-zA-Z]){4}([a-zA-Z]){2}([0-9a-zA-Z]){2}([0-9a-zA-Z]{3})?$", $swift);
     }
 
