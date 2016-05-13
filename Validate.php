@@ -95,6 +95,16 @@ class Validate
     }
 
     /**
+     * Static function for validating URLs.
+     * @param string $url URL
+     * @return bool is the URL valid?
+     */
+    static function url (string $url) : bool
+    {
+        return false !== filter_var($url, FILTER_VALIDATE_URL);
+    }
+
+    /**
      * Static function for validating a number range.
      * @param float $value number to validate
      * @param float $min min value
