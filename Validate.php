@@ -59,7 +59,7 @@ class Validate
      * @param string $address IP address
      * @return bool is the IP Address valid?
      */
-    static function ip(string $address) : bool
+    static function ip (string $address) : bool
     {
         return false !== filter_var($address, FILTER_VALIDATE_IP);
     }
@@ -82,6 +82,16 @@ class Validate
     static function ipv6 (string $address) : bool
     {
         return false !== filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+    }
+
+    /**
+     * Static function for validation a Mac Address.
+     * @param string $address mac address
+     * @return bool is the mac valid?
+     */
+    static function mac (string $address) : bool
+    {
+        return false !== filter_var($address, FILTER_VALIDATE_MAC);
     }
 
     /**
