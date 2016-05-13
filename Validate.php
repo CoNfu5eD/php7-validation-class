@@ -118,7 +118,7 @@ class Validate
             "ES" => 24, "SE" => 24, "CH" => 21, "TN" => 24, "TR" => 26, "AE" => 23, "GB" => 22, "VG" => 24
         ];
 
-        $iban = mb_ereg_replace("/\s\-/", "", $iban); // sanitize for validation (remove spaces)
+        $iban = mb_ereg_replace("/(\s|\-)/", "", $iban); // sanitize for validation (remove spaces)
         $country = mb_strtoupper(mb_substr($iban, 0, 2));
 
         // we know the country the IBAN belongs to?
