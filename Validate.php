@@ -1,18 +1,14 @@
 <?php
 
 /**
- * User: Marcel 'CoNfu5eD Naeve <confu5ed@serious-pro.de>
- * Date: 03.05.2016
- * Time: 21:28
- */
-
-/**
- * Class Validate.
+ * Utility Class for validating data.
+ * @license https://github.com/CoNfu5eD/php7-validation-class/blob/master/LICENSE MIT
+ * @author CoNfu5eD (Marcel Naeve) <confu5ed@serious-pro.de>
  */
 class Validate
 {
     /**
-     * Static function for validating email addresses with multiple secure levels and black- and whitelist.
+     * Static method for validating email addresses with multiple secure levels and black- and whitelist.
      * @param string $email email address
      * @param int $level secure level
      * @param array $lists filter lists like whitelist, blacklist,..
@@ -55,7 +51,7 @@ class Validate
     }
 
     /**
-     * Static function for validating a IP Address.
+     * Static method for validating a IP Address.
      * @param string $address IP address
      * @return bool is the IP Address valid?
      */
@@ -65,7 +61,7 @@ class Validate
     }
 
     /**
-     * Static function for validating a IPv4 Address.
+     * Static method for validating a IPv4 Address.
      * @param string $address IPv4 address
      * @return bool is the IPv4 Address valid?
      */
@@ -75,7 +71,7 @@ class Validate
     }
 
     /**
-     * Static function for validating a IPv6 Address.
+     * Static method for validating a IPv6 Address.
      * @param string $address IPv6 address
      * @return bool is the IPv6 Address valid?
      */
@@ -85,7 +81,7 @@ class Validate
     }
 
     /**
-     * Static function for validation a Mac Address.
+     * Static method for validation a Mac Address.
      * @param string $address mac address
      * @return bool is the mac valid?
      */
@@ -95,7 +91,7 @@ class Validate
     }
 
     /**
-     * Static function for validating URLs.
+     * Static method for validating URLs.
      * @param string $url URL
      * @return bool is the URL valid?
      */
@@ -105,7 +101,7 @@ class Validate
     }
 
     /**
-     * Static function for validating a number range.
+     * Static method for validating a number range.
      * @param float $value number to validate
      * @param float $min min value
      * @param float $max max value
@@ -117,7 +113,8 @@ class Validate
     }
 
     /**
-     * Static function for validating a IBAN (International Bank Account Number).
+     * Static method for validating a IBAN (International Bank Account Number).
+     * @link https://www.swift.com/sites/default/files/resources/swift_standards_ibanregistry.pdf IBAN Standards (Swift)
      * @param string $iban International Bank Account Number
      * @return bool is the IBAN valid?
      */
@@ -168,7 +165,7 @@ class Validate
     }
 
     /**
-     * A static method to validate SWIFT/BIC codes.
+     * Static method to validate SWIFT/BIC codes.
      * @param string $swift swift/bic code
      * @return bool swift/bic valid?
      */
