@@ -288,4 +288,68 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         $this->assertFalse( Validate::ip("@") );
     }
 
+    /*
+     * Validate::mac(); Tests
+     */
+    public function testMac_random_valid11()
+    {
+        $this->assertTrue( Validate::mac("ce:bb:ac:22:9e:72") );
+    }
+    public function testMac_random_valid12()
+    {
+        $this->assertTrue( Validate::mac("ce-bb-ac-22-9e-72") );
+    }
+    public function testMac_random_valid13()
+    {
+        $this->assertTrue( Validate::mac("cebb.ac22.9e72") );
+    }
+    public function testMac_random_valid21()
+    {
+        $this->assertTrue( Validate::mac("77:a8:7a:bf:45:6f") );
+    }
+    public function testMac_random_valid22()
+    {
+        $this->assertTrue( Validate::mac("77-a8-7a-bf-45-6f") );
+    }
+    public function testMac_random_valid23()
+    {
+        $this->assertTrue( Validate::mac("77a8.7abf.456f") );
+    }
+    public function testMac_invalid1()
+    {
+        $this->assertFalse( Validate::mac("58-E4-C8-C3-5G-23") );
+    }
+    public function testMac_invalid2()
+    {
+        $this->assertFalse( Validate::mac("58-E4-C8-C3-5-23") );
+    }
+    public function testMac_invalid3()
+    {
+        $this->assertFalse( Validate::mac("58-E4-C8-C3-23") );
+    }
+    public function testMac_invalid4()
+    {
+        $this->assertFalse( Validate::mac("58-E4-C8-23") );
+    }
+    public function testMac_empty()
+    {
+        $this->assertFalse( Validate::mac("") );
+    }
+    public function testMac_trash1()
+    {
+        $this->assertFalse( Validate::mac("%") );
+    }
+    public function testMac_trash2()
+    {
+        $this->assertFalse( Validate::mac("-") );
+    }
+    public function testMac_trash3()
+    {
+        $this->assertFalse( Validate::mac(".") );
+    }
+    public function testMac_trash4()
+    {
+        $this->assertFalse( Validate::mac(":") );
+    }
+
 }
