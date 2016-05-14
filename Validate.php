@@ -19,16 +19,17 @@ class Validate
         $results = true;
         $email = trim($email); // sanitize before validation
         $split = explode('@', $email);
+        $address = $split[count($split)-1];
 
         // Whitelisted?
         if(isset($lists['whitelist'])) {
-            if(in_array($email, $lists['whitelist']) || in_array($split[1], $lists['whitelist']))
+            if(in_array($email, $lists['whitelist']) || in_array($address, $lists['whitelist']))
                 return true;
         }
 
         // Blacklisted?
         if(isset($lists['blacklist'])) {
-            if(in_array($email, $lists['blacklist']) || in_array($split[1], $lists['blacklist']))
+            if(in_array($email, $lists['blacklist']) || in_array($address, $lists['blacklist']))
                 return false;
         }
 
@@ -43,8 +44,8 @@ class Validate
         }
 
         // check for dns MX entry
-        if($results && $level >= 2) {
-            $results = checkdnsrr($split[1], "MX");
+        if($results && $level >= 2 && !Validate::ip($address)) {
+            $results = checkdnsrr($address, "MX");
         }
 
         return $results;
