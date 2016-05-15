@@ -352,4 +352,54 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         $this->assertFalse( Validate::mac(":") );
     }
 
+    /*
+     * Validate::range(); Tests
+     */
+    public function testRange_int1() {
+        $this->assertTrue( Validate::range(23, 20, 25) );
+    }
+    public function testRange_int2() {
+        $this->assertTrue( Validate::range(0, -1, 3) );
+    }
+    public function testRange_int3() {
+        $this->assertFalse( Validate::range(-50, -1, 3) );
+    }
+    public function testRange_float1() {
+        $this->assertTrue( Validate::range(2.3, 2.0, 2.5) );
+    }
+    public function testRange_float2() {
+        $this->assertTrue( Validate::range(0.0, -0.1, 0.3) );
+    }
+    public function testRange_float3() {
+        $this->assertFalse( Validate::range(-5.0, -0.1, 0.3) );
+    }
+    public function testRange_int_in_float1() {
+        $this->assertTrue( Validate::range(2, 1.9, 2.1) );
+    }
+    public function testRange_int_in_float2() {
+        $this->assertTrue( Validate::range(0, -0.1, 0.3) );
+    }
+    public function testRange_int_in_float3() {
+        $this->assertFalse( Validate::range(5, -0.1, 0.3) );
+    }
+    public function testRange_float_in_int1() {
+        $this->assertTrue( Validate::range(2.1, 2, 3) );
+    }
+    public function testRange_float_in_int2() {
+        $this->assertTrue( Validate::range(0.1, 0, 1) );
+    }
+    public function testRange_float_in_int3() {
+        $this->assertFalse( Validate::range(-5.5, -5, 0) );
+    }
+
+    /*
+     * Validate::iban(); Tests
+     */
+
+
+    /*
+     * Validate::swift(); Tests
+     */
+
+
 }
